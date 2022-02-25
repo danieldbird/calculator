@@ -1,0 +1,38 @@
+.calculator {
+  background: grey;
+  width: 480px;
+  height: 600px;
+  display: grid;
+  padding: 30px 20px;
+  position: relative;
+}
+
+.displayContainer {
+  width: 100%;
+  background-color: black;
+  min-height: 80px;
+  height: auto;
+  position: relative;
+  color: white;
+}
+
+.keypad {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: repeat(5, 1fr);
+}
+
+#ac,
+#zero {
+  grid-column: span 2;
+}
+
+#equal {
+  grid-row: span 2;
+}
+
+.key {
+  border: 1px solid black;
+  text-align: center;
+}
