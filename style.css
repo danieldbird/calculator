@@ -7,7 +7,7 @@
   position: relative;
 }
 
-.displayContainer {
+.display {
   width: 100%;
   background-color: black;
   min-height: 80px;
@@ -16,20 +16,24 @@
   color: white;
 }
 
-.keypad {
+.numpad {
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: repeat(5, 1fr);
 }
 
-#ac,
-#zero {
+.ac,
+.zero {
   grid-column: span 2;
 }
+.ac {
+  background: rgb(255, 141, 141);
+}
 
-#equal {
+.equal {
   grid-row: span 2;
+  background: rgb(116, 116, 247);
 }
 
 .key {
