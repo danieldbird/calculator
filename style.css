@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .calculator {
   background: grey;
   width: 480px;
@@ -14,6 +18,8 @@
   height: auto;
   position: relative;
   color: white;
+  text-align: right;
+  padding: 50px 30px;
 }
 
 .numpad {
@@ -39,4 +45,15 @@
 .key {
   border: 1px solid black;
   text-align: center;
+}
+
+.displayHistory {
+  color: yellowgreen;
+  font-size: 170%;
+}
+
+.displayLive {
+  color: white;
+  font-size: 220%;
+  margin-top: 40px;
 }
