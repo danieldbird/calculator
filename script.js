@@ -19,7 +19,7 @@ const numpad = document.querySelector(".numpad");
 const currentDisplayValue = document.querySelector(".displayLive");
 const currentDisplayHistory = document.querySelector(".displayHistory");
 
-const keys = ["AC", "/", "*", 7, 8, 9, "-", 4, 5, 6, "+", 1, 2, 3, "=", 0, "."];
+const keys = ["AC", "/", "x", 7, 8, 9, "-", 4, 5, 6, "+", 1, 2, 3, "=", 0, "."];
 const operators = [1, 2, 6, 10];
 const operatorValues = ["/", "*", "-", "+"];
 const functions = [0, 14];
@@ -51,6 +51,7 @@ function addButtons() {
     // add zero class and event listener
     else if (i === 15) {
       el.classList.add("zero");
+      el.classList.add("number");
       el.addEventListener("click", pressNumber);
     }
 
@@ -65,6 +66,7 @@ function addButtons() {
       el.addEventListener("click", pressOperator);
     } else {
       el.addEventListener("click", pressNumber);
+      el.classList.add("number");
     }
 
     numpad.appendChild(el);
@@ -94,13 +96,23 @@ function pressNumber(i) {
   }
 }
 
-// function to operate on 2 numbers + - * /
-function pressOperator(i) {
+// function to check whether 1) there is digits to be pushed to wholeNumbers array 2) if there is a negative digit entered as the first number
+function checkDigits() {
+  let a;
   if (digits.length !== 0) {
-    let a = parseFloat(digits.join(""));
+    if (wholeNumbers.length === 1 && wholeNumbers[0] === "-") {
+      digits.unshift(wholeNumbers[0]);
+      wholeNumbers = [];
+    }
+    a = parseFloat(digits.join(""));
     wholeNumbers.push(a);
   }
   digits = [];
+}
+
+// function to operate on 2 numbers + - * /
+function pressOperator(i) {
+  checkDigits();
 
   let b = wholeNumbers.length - 1;
   if (operatorValues.includes(wholeNumbers[b]) && operatorValues.includes(i.target.innerHTML)) {
@@ -114,45 +126,88 @@ function pressOperator(i) {
 }
 
 // function to equal
+let newNumber = 0;
+
 function pressEquals(i) {
-  if (digits.length !== 0) {
-    let a = parseFloat(digits.join(""));
-    wholeNumbers.push(a);
+  checkDigits();
+
+  // when = is pressed and there is only 1 number, then return that number and clear history
+  if (wholeNumbers.length === 1) {
+    currentDisplayValue.innerHTML = wholeNumbers[0];
+    currentDisplayHistory.innerHTML = "";
+    return;
   }
-  digits = [];
 
-  for (let m = 1; m < wholeNumbers.length; m++) {
-    let newNumber = 0;
+  // for loop to go through all the operators in the wholeNumbers array
+  let newWholeNumbers;
+  newWholeNumbers = wholeNumbers.map((x) => x);
 
+  for (let m = 0; m < wholeNumbers.length; m += 2) {
+    // set the index in an array for multiplier and division priorities
+    let operatorBeforeM = m - 1;
+    let numberBeforeM = m;
+    let twoNumberBeforeM = m - 2;
+
+    // go through all the calculations needed in the wholeNumbers array
     switch (wholeNumbers[1]) {
       case "+":
         newNumber = Number(wholeNumbers[0]) + Number(wholeNumbers[2]);
-        wholeNumbers.pop(wholeNumbers[0], wholeNumbers[1], wholeNumbers[2]);
-        wholeNumbers.unshift(newNumber);
-        console.log("yes");
-
+        updateWholeNumbers();
         break;
       case "-":
-        newNumber = wholeNumbers[0] - wholeNumbers[2];
-        wholeNumbers.pop(wholeNumbers[0], wholeNumbers[1], wholeNumbers[2]);
-        wholeNumbers.unshift(newNumber);
-
+        newNumber = Number(wholeNumbers[0]) - Number(wholeNumbers[2]);
+        updateWholeNumbers();
         break;
-      case "*":
-        newNumber = wholeNumbers[0] * wholeNumbers[2];
-        wholeNumbers.pop(wholeNumbers[0], wholeNumbers[1], wholeNumbers[2]);
-        wholeNumbers.unshift(newNumber);
-
+      case "x":
+        // check whether the operator before the current operator is a + or - and undo the previous calculation to priotize the current multiplier
+        if (newWholeNumbers[operatorBeforeM] === "+" || newWholeNumbers[operatorBeforeM] === "-") {
+          // remove 1st number in the wholeNumbers array (undo the result) and bring back the second number in the last round of calculation
+          wholeNumbers.shift();
+          wholeNumbers.unshift(newWholeNumbers[numberBeforeM]);
+          // perform mulitplier calculation
+          newNumber = Number(wholeNumbers[0]) * Number(wholeNumbers[2]);
+          updateWholeNumbers();
+          // bring back the first number and the operator in the last round of calculation
+          wholeNumbers.unshift(newWholeNumbers[operatorBeforeM]);
+          wholeNumbers.unshift(newWholeNumbers[twoNumberBeforeM]);
+          // decrease m by 2 to get 1 more round of calculation
+          m = m - 2;
+        } else {
+          newNumber = Number(wholeNumbers[0]) * Number(wholeNumbers[2]);
+          updateWholeNumbers();
+        }
         break;
       case "/":
-        newNumber = wholeNumbers[0] / wholeNumbers[2];
-        wholeNumbers.pop(wholeNumbers[0], wholeNumbers[1], wholeNumbers[2]);
-        wholeNumbers.unshift(newNumber);
-
+        // check whether the operator before the current operator is a + or - and undo the previous calculation to priotize the current division
+        if (newWholeNumbers[operatorBeforeM] === "+" || newWholeNumbers[operatorBeforeM] === "-") {
+          // remove 1st number in the wholeNumbers array (undo the result) and bring back the second number in the last round of calculation
+          wholeNumbers.shift();
+          wholeNumbers.unshift(newWholeNumbers[numberBeforeM]);
+          // perform mulitplier calculation
+          newNumber = Number(wholeNumbers[0]) / Number(wholeNumbers[2]);
+          updateWholeNumbers();
+          // bring back the first number and the operator in the last round of calculation
+          wholeNumbers.unshift(newWholeNumbers[operatorBeforeM]);
+          wholeNumbers.unshift(newWholeNumbers[twoNumberBeforeM]);
+          // decrease m by 2 to get 1 more round of calculation
+          m = m - 2;
+        } else {
+          newNumber = Number(wholeNumbers[0]) / Number(wholeNumbers[2]);
+          updateWholeNumbers();
+        }
         break;
     }
-    console.log(wholeNumbers);
+    currentDisplayValue.innerHTML = wholeNumbers[0];
+    currentDisplayHistory.innerHTML = "";
   }
+}
+
+// function to update the wholeNumbers array after the operator function
+function updateWholeNumbers() {
+  wholeNumbers.shift();
+  wholeNumbers.shift();
+  wholeNumbers.shift();
+  wholeNumbers.unshift(newNumber);
 }
 
 function start() {
