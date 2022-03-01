@@ -85,7 +85,7 @@ function pressAC() {
 function pressNumber(i) {
   if (digits.includes(".") && i.target.innerHTML === ".") {
     return;
-  } else if (i.target.innerHTML === ".") {
+  } else if (i.target.innerHTML === "." && digits.length === 0) {
     digits.push(0, i.target.innerHTML);
     currentDisplayValue.innerHTML = i.target.innerHTML;
     currentDisplayHistory.innerHTML = wholeNumbers.join("") + digits.join("");
