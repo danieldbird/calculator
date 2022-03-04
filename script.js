@@ -84,6 +84,10 @@ function pressAC() {
 
 // function to press numbers
 function pressNumber(i) {
+  // limit display to 9 digits
+  // if (digits.length === 9) {
+  //   return;
+  // }
   if (digits.includes(".") && i.target.innerHTML === ".") {
     return;
   } else if (i.target.innerHTML === "." && digits.length === 0) {
