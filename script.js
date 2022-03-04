@@ -14,6 +14,7 @@
 // 3. if = pressed, perform calculation and store the result as the first value in the array
 // 4. if AC pressed, clear everything
 
+const calculator = document.querySelector(".calculator");
 const display = document.querySelector(".display");
 const numpad = document.querySelector(".numpad");
 const currentDisplayValue = document.querySelector(".displayLive");
@@ -216,3 +217,39 @@ function start() {
 }
 
 start();
+
+// move functionality
+display.onmousedown = function (event) {
+  let shiftX = event.clientX - calculator.getBoundingClientRect().left;
+  let shiftY = event.clientY - calculator.getBoundingClientRect().top;
+
+  calculator.style.position = "absolute";
+  calculator.style.zIndex = 1000;
+  document.body.append(calculator);
+
+  moveAt(event.pageX, event.pageY);
+
+  // moves the display at (pageX, pageY) coordinates
+  // taking initial shifts into account
+  function moveAt(pageX, pageY) {
+    calculator.style.left = pageX - shiftX + "px";
+    calculator.style.top = pageY - shiftY + "px";
+  }
+
+  function onMouseMove(event) {
+    moveAt(event.pageX, event.pageY);
+  }
+
+  // move the display on mousemove
+  document.addEventListener("mousemove", onMouseMove);
+
+  // drop the display, remove unneeded handlers
+  display.onmouseup = function () {
+    document.removeEventListener("mousemove", onMouseMove);
+    display.onmouseup = null;
+  };
+};
+
+display.ondragstart = function () {
+  return false;
+};

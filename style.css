@@ -48,6 +48,9 @@ body {
   color: white;
   background: rgb(41, 41, 41);
   border-radius: 5px 5px 0 0;
+  cursor: move;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
 }
 
 .numpad {
