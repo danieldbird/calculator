@@ -51,6 +51,7 @@ body {
   cursor: move;
   cursor: -moz-grab;
   cursor: -webkit-grab;
+  overflow-x: hidden;
 }
 
 .numpad {
