@@ -7,12 +7,30 @@
 html,
 body {
   margin: 0;
+  height: 100%;
+}
+
+body {
+  background: rgb(32, 32, 32);
+}
+
+.wrapper {
+  max-width: 2000px;
+  width: 100%;
+  margin: 0 auto;
+  background-image: url("images/table.jpg");
+  background-repeat: no-repeat;
+  background-color: rgb(31, 31, 31);
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
 .calculator {
   background: #141414;
   width: 300px;
-  margin: 2rem auto;
+  margin: 0 auto;
   padding: 10px;
   border-radius: 10px;
   /* disable text selection */
@@ -20,6 +38,7 @@ body {
   -moz-user-select: none; /* Firefox all */
   -ms-user-select: none; /* IE 10+ */
   user-select: none;
+  box-shadow: 15px 5px 10px rgba(0, 0, 0, 0.75);
 }
 
 .display {
@@ -50,6 +69,12 @@ body {
 .number {
   background: #444;
 }
+.number:hover {
+  background: rgb(80, 80, 80);
+}
+.number:active {
+  background: rgb(92, 92, 92);
+}
 
 .ac,
 .zero {
@@ -58,6 +83,12 @@ body {
 
 .ac {
   background: rgb(216, 73, 73);
+}
+.ac:hover {
+  background: rgb(233, 79, 79);
+}
+.ac:active {
+  background: rgb(253, 86, 86);
 }
 
 .zero {
@@ -69,9 +100,21 @@ body {
   background: rgb(46, 78, 138);
   border-radius: 0 0 5px 0;
 }
+.equal:hover {
+  background: rgb(51, 87, 153);
+}
+.equal:active {
+  background: rgb(57, 96, 170);
+}
 
 .operator {
   background: rgb(95, 95, 95);
+}
+.operator:hover {
+  background: rgb(107, 107, 107);
+}
+.operator:active {
+  background: rgb(117, 117, 117);
 }
 
 .displayHistory {
@@ -79,4 +122,13 @@ body {
   font-size: 35px;
   color: rgb(170, 255, 86);
   overflow: hidden;
+}
+
+.glare {
+  width: 0;
+  height: 0;
+  border-top: 325px solid rgba(255, 255, 255, 0.025);
+  border-right: 280px solid transparent;
+  position: absolute;
+  pointer-events: none;
 }
