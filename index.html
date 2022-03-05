@@ -2,22 +2,36 @@
 <html>
   <head>
     <title>Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Chen and Daniel's Calculator" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.3.0/math.min.js"
+      integrity="sha512-iKuhSRAlYwfcZY7K2cH0EZRi3qkTMbuXa+fLfcTFO6e2mtIslEPk/kfXc5pZXg0TR4s4AzCdmKDTZlIAqBpBxA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="script.js" defer></script>
+    <script src="addNumberElements.js" defer></script>
+    <script src="dragCalculator.js" defer></script>
+    <script src="addGlare.js" defer></script>
   </head>
   <body>
-    <div class="wrapper">
-      <div class="calculator">
-        <div class="glare"></div>
+    <div class="calculator">
+      <div class="display-bg">
         <div class="display">
-          <div class="displayHistory"></div>
-          <div class="displayLive"></div>
+          <div class="historyDisplay"></div>
+          <div class="currentDisplay">0</div>
         </div>
-        <div class="numpad"></div>
       </div>
+      <div class="numpad"></div>
     </div>
-    <script src="script.js"></script>
   </body>
 </html>
