@@ -179,4 +179,7 @@ function start() {
 start();
 
 // todo
+// fix and limit digit number to fit on display, to test press 8, 11 times and hit equals
 // either handle negative numbers straight away, or add a +/- button
+// paste from clipboard
+// copy to clipboard
