@@ -41,19 +41,13 @@ body {
 
 .display {
   font-family: "Roboto Mono", monospace;
-  font-size: 45px;
-  padding: 15px 30px;
-  text-align: right;
-  color: white;
-  background: rgb(41, 41, 41);
-  border-radius: 5px 5px 0 0;
   cursor: move;
   cursor: -moz-grab;
   cursor: -webkit-grab;
-  margin-left: 30px;
+  margin-left: 20px;
   position: relative;
   overflow: hidden;
-  height: 130px;
+  height: 120px;
 }
 
 .display-bg {
@@ -64,21 +58,20 @@ body {
 .historyDisplay {
   position: absolute;
   right: 20px;
-  height: 100px;
-  font-size: 24.8px;
+  top: 15px;
+  font-size: 20px;
   color: rgb(170, 255, 86);
   white-space: nowrap;
   font-family: "Roboto Mono", monospace;
-  letter-spacing: 0.06rem;
 }
 
 .currentDisplay {
   font-family: "Roboto Mono", monospace;
-  height: 100px;
   position: absolute;
-  top: 60px;
+  bottom: 15px;
   right: 30px;
-  font-size: 28px;
+  font-size: 24px;
+  color: #fff;
 }
 
 .numpad {

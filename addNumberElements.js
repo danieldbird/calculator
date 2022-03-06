@@ -145,7 +145,7 @@ function pressEquals(e) {
   const evaluation = math.evaluate(`${sumArray.join("").replaceAll("x", "*")}`);
   // display an exponential when a number is too large
   const result = math.format(evaluation, {
-    precision: 10,
+    // precision: 10,
     lowerExp: -10,
     upperExp: 10,
   });
