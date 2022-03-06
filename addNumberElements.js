@@ -144,12 +144,10 @@ function pressEquals(e) {
   // do the calculation, changing 'x' to '*'
   const evaluation = math.evaluate(`${sumArray.join("").replaceAll("x", "*")}`);
   // display an exponential when a number is too large
-  // TODO: bug test, and verify this is working.
   const result = math.format(evaluation, {
-    notation: "auto",
-    precision: 7,
-    lowerExp: -9,
-    upperExp: 9,
+    precision: 10,
+    lowerExp: -10,
+    upperExp: 10,
   });
   // update the values to the result and update the display
   currentHistory = result;

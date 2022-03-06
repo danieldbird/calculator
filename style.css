@@ -63,7 +63,7 @@ body {
 
 .historyDisplay {
   position: absolute;
-  right: 30px;
+  right: 20px;
   height: 100px;
   font-size: 24.8px;
   color: rgb(170, 255, 86);
@@ -78,7 +78,7 @@ body {
   position: absolute;
   top: 60px;
   right: 30px;
-  font-size: 40px;
+  font-size: 37px;
 }
 
 .numpad {
